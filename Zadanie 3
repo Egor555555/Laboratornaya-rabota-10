@@ -1,0 +1,53 @@
+//Дана матрица размера M × N. Поменять местами столбец с номером 1 и последний из столбцов, содержащих только положительные элементы.
+//Если требуемых столбцов нет, то вывести матрицу без изменений.
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+    srand(time(0));
+    int M, N, jend = 0, n = 0;
+    cout << "Enter M: "; cin >> M;
+    cout << "Enter N: "; cin >> N;
+
+    double** a = new double* [M];
+    for (int k = 0; k < M; k++)
+        a[k] = new double[N];
+
+    for (int k = 0; k < M; k++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            a[k][j] = rand() % 19 - 9;
+            cout << setw(2) << a[k][j] << " ";
+        }
+        cout << endl;
+    }
+
+    for (int j = 0; j < N; j++)
+    {
+        int m = 0;
+        for (int k = 0; k < M; k++)
+            if (a[k][j] > 0) m++;
+        if (m == M) { n++; jend = j; }
+    }
+    cout << endl;
+
+    if (n != 0)
+        for (int k = 0; k < M; k++)
+            swap(a[k][0], a[k][jend]);
+
+    for (int k = 0; k < M; k++)
+    {
+        for (int j = 0; j < N; j++)
+            cout << setw(2) << a[k][j] << " ";
+        cout << endl;
+    }
+
+    for (int k = 0; k < M; k++)
+        delete[] a[k];
+    delete[] a;
+    return 0;
+}
