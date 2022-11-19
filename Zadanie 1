@@ -1,0 +1,37 @@
+//Даны целые положительные числа M и N. Сформировать целочисленную матрицу размера M × N, у которой все элементы I-й строки имеют значение 10*I (I = 1, …, M).
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int N, M;
+    cin >> N >> M;
+
+    int** array = new int* [N]; 
+    for (int count = 0; count < N; count++)
+        array[count] = new int[M]; 
+
+
+    for (int j = 0; j < M; j++)
+    {
+        for (int i = 0; i < N; i++)
+        {
+            array[i][j] = (i+1) * 10;
+        }
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < M; j++)
+        {
+            cout << array[i][j] << " ";
+        }
+        cout << "\n";
+    }
+
+    for (int count = 0; count < N; count++)
+        delete[] array[count];
+
+    return 0;
+}
